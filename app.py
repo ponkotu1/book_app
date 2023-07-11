@@ -11,19 +11,19 @@ def index():
 
     if msg == None:
         # 通常のアクセスの場合
-        return render_template('index.html')
+        return render_template('login.html')
     else :
         # register_exe() から redirect された場合
-        return render_template('index.html', msg=msg)
+        return render_template('login.html', msg=msg)
 
-# @app.route('/', methods=['POST'])
-# def login():
-#     error = 'ログインに失敗しました。'
-#     return render_template('index.html', error=error)
+@app.route('/', methods=['POST'])
+def login():
+     error = 'ログインに失敗しました。'
+     return render_template('login.html', error=error)
 
-@app.route('/register')
+@app.route('/create')
 def register_form():
-    return render_template('login.html')
+    return render_template('create_user.html')
 
 @app.route('/register_exe', methods=['POST'])
 def register_exe():
@@ -33,21 +33,21 @@ def register_exe():
     # バリデーションチェック
     if user_name == '':
         error = 'ユーザ名が未入力です'
-        return render_template('register.html', error=error)
+        return render_template('create_user.html', error=error)
 
     if password == '':
         error = 'パスワードが未入力です'
-        return render_template('register.html', error=error)
+        return render_template('create_user.html', error=error)
 
     count = db.insert_user(user_name, password)
 
     if count == 1:
         msg = '登録が完了しました。'
-        return redirect(url_for('index', msg=msg))  # Redirect で index()に Get アクセス
+        return redirect(url_for('login', msg=msg))  # Redirect で index()に Get アクセス
         # return render_template('index.html', msg=msg)
     else:
         error = '登録に失敗しました。'
-        return render_template('login.html', error=error)
+        return render_template('create_user.html', error=error)
 
 
     
@@ -65,7 +65,7 @@ def login():
         error = 'ユーザ名またはパスワードが違います。'
         
         input_data = {'user_name':user_name, 'password':password}
-        return render_template('index.html', error=error)
+        return render_template('login.html', error=error)
     
 @app.route('/mypage', methods=['GET'])
 def mypage():
@@ -82,11 +82,3 @@ if __name__ == '__main__':
 def logout():
     session.pop('user', None) # session の破棄
     return redirect(url_for('index')) # ログイン画面にリダイレクト
-
-@app.route('/')
-def index():
-    return render_template('mail.html')
-
-@app.route('/send', methods=['GET'])
-def navigateSend():
-    return render_template('send.html')
