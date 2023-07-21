@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/book_list.css')}}">
+  <title>Book Search</title>
+</head>
+<body>
+{% block content %}
+{% if books %}
+<h1>検索結果</h1>    
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>出版社</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <td>{{ book[1] }}</td>
+        <td>{{ book[2] }}</td>
+        <td>{{ book[3] }}</td>
+        <td>{{ book[4] }}</td>
+      {% endfor %}
+    </tr>
+    <tbody>
+</table>
+    {% else %}
+    <p>該当する本は見つかりませんでした。</p>
+    {% endif %}
+    
+    {% endblock %}
+    
+</body>
+</html>

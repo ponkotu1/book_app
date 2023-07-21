@@ -24,7 +24,7 @@ def get_hash(password, salt):
 
 # 1件のユーザを新規登録
 def insert_user(user_name, password):
-  sql = 'INSERT INTO user_sample VALUES (default, %s, %s, %s)'
+  sql = 'INSERT INTO users VALUES (default, %s, %s, %s)'
   salt = get_salt() # ソルトの生成
   hashed_password = get_hash(password, salt) # 生成したソルトでハッシュ
 
@@ -40,13 +40,14 @@ def insert_user(user_name, password):
     count = 0   # 例外が発生したら 0 を return する。
 
   finally:  # 成功しようが、失敗しようが、close する。
+    print(f'count:{count}')
     cursor.close()
     connection.close()
 
   return count
 
 def login(user_name, password):
-  sql = 'SELECT hashed_password, salt FROM user_sample WHERE name = %s'
+  sql = 'SELECT hashed_password, salt FROM users WHERE name = %s'
   flg = False
   try :
     connection = get_connection()
@@ -65,5 +66,5 @@ def login(user_name, password):
     flg = False
   finally :
     cursor.close()
-  connection.close()
+    connection.close()
   return flg  

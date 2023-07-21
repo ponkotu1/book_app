@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/update_book.css')}}">
+  <title>Document</title>
+</head>
+<body>
+    <h1>更新</h1>
+    <form action = "{{url_for('update_exe')}}" method = "post">
+    <p>変更したい本のisbnを入力してください</p>
+    <input type= "number" name = "isbn"><br>
+
+    タイトル<input type= "text" name = "title"><br>
+    著者<input type= "text" name = "auther"><br>
+    出版社<input type= "text" name = "publisher"><br>
+    <button type= "submit">更新</button> 
+    </form>
+</body>
+</html>
