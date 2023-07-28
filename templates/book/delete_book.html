@@ -5,9 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{url_for('static', filename='css/search.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/mypage.css')}}">
   <title>Document</title>
 </head>
 <body>
+  <div class="navbar">
+    <a href="{{url_for('create_book')}}">本の新規登録</a>
+    <a href="{{url_for('select_all')}}">本の一覧</a>
+    <a href="{{url_for('delete_book')}}">本の削除</a>
+    <a href="{{url_for('update_book')}}">本の更新</a>
+    <a href="{{url_for('search_book')}}">本の検索</a>
+    <a href="{{url_for('logout')}}">ログアウト</a>
+  </div>
     <h3>削除したい本のISBNを入力してください</h3>
     <form action = "{{url_for('delete_exe')}}" method = "post">
         <label for="title">ISBN</label>
